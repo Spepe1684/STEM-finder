@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>STEM Scout — Find Your Next Opportunity</title>
+<style>
+:root{--navy:#14213d;--blue:#2457c5;--teal:#0e8178;--ink:#182230;--muted:#667085;--paper:#f5f7fb;--line:#e1e7f0;--white:#fff;--gold:#f6c453}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink);line-height:1.5}
+a{color:inherit}.topbar{background:var(--navy);color:white;padding:15px max(22px,calc((100% - 1120px)/2));display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:850;font-size:1.25rem;letter-spacing:-.04em}.brand span{color:#7fe0d2}.topbar small{color:#d2d9e7}
+main{max-width:1120px;margin:auto;padding:28px 22px 54px}.hero{background:linear-gradient(125deg,#14213d,#214b85 65%,#147f7a);color:white;border-radius:24px;padding:36px;display:grid;grid-template-columns:1.5fr 1fr;gap:28px;align-items:center;overflow:hidden;position:relative}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-weight:800;font-size:.76rem;color:#9de6dc}.hero h1{font-size:clamp(2rem,4vw,3.25rem);line-height:1.06;letter-spacing:-.05em;margin:10px 0 14px;max-width:640px}.hero p{color:#e3ebf8;max-width:600px;margin:0 0 22px}.hero .search{display:flex;gap:8px;background:white;padding:6px;border-radius:12px;max-width:620px}.search input{border:0;outline:0;padding:12px;flex:1;min-width:0;font:inherit;color:var(--ink)}button{font:inherit;cursor:pointer}.primary{border:0;background:var(--gold);color:#222b3d;font-weight:800;border-radius:9px;padding:12px 16px}.hero-art{min-height:200px;display:grid;place-items:center}.orbit{width:220px;height:220px;border:1px solid #8db5df;border-radius:50%;display:grid;place-items:center;position:relative}.orbit:before,.orbit:after{content:"";position:absolute;border:1px solid #8db5df;border-radius:50%;inset:25px}.orbit:after{inset:55px}.rocket{font-size:5rem;filter:drop-shadow(0 12px 12px #07162b66)}.float{position:absolute;background:#fff;color:var(--navy);padding:8px 11px;border-radius:10px;font-weight:800;font-size:.8rem;box-shadow:0 8px 24px #07162b33}.float.one{top:18px;right:-10px}.float.two{bottom:18px;left:-18px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0 28px}.stat{background:white;border:1px solid var(--line);border-radius:15px;padding:16px 18px}.stat strong{display:block;font-size:1.5rem;color:var(--navy)}.stat span{color:var(--muted);font-size:.9rem}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:24px 0 14px}.section-head h2{margin:0;font-size:1.5rem;letter-spacing:-.03em}.section-head p{margin:4px 0 0;color:var(--muted);font-size:.92rem}
+.filters{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:10px;margin-bottom:18px}.field label{display:block;font-size:.78rem;font-weight:800;color:#475467;margin-bottom:5px}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:white;font:inherit;color:var(--ink)}
+.results-line{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.9rem;margin-bottom:12px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{background:white;border:1px solid var(--line);border-radius:17px;padding:18px;display:flex;flex-direction:column;min-height:280px;box-shadow:0 3px 12px #1b2c4a08}.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.tag{font-size:.73rem;font-weight:800;background:#eaf0ff;color:#254da5;padding:5px 8px;border-radius:999px}.saved{border:1px solid var(--line);background:white;border-radius:8px;padding:5px 8px;color:#475467}.card h3{font-size:1.1rem;line-height:1.25;margin:14px 0 7px;letter-spacing:-.02em}.org{font-size:.84rem;color:var(--teal);font-weight:750}.card p{font-size:.9rem;color:#596579;margin:10px 0 14px}.meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;margin-bottom:14px}.meta span{font-size:.76rem;color:#475467;background:#f2f4f7;padding:5px 8px;border-radius:7px}.card-actions{display:flex;gap:8px}.card-actions a,.card-actions button{flex:1;text-align:center;border-radius:9px;padding:10px;text-decoration:none;font-weight:800;font-size:.85rem}.visit{background:var(--blue);color:white}.details{background:white;color:var(--navy);border:1px solid var(--line)}
+.empty{grid-column:1/-1;text-align:center;padding:45px 20px;background:white;border:1px dashed #c8d2e2;border-radius:16px;color:var(--muted)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}.info{border-radius:17px;padding:22px;background:#e9f5f3;border:1px solid #c9e7e2}.info:nth-child(2){background:#fff4d9;border-color:#f3dfab}.info h3{margin:0 0 8px}.info p{margin:0;color:#475467;font-size:.92rem}.footer{margin-top:32px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:.82rem}.footer strong{color:var(--ink)}
+dialog{border:0;border-radius:18px;max-width:540px;width:calc(100% - 28px);padding:24px;box-shadow:0 20px 80px #0b183a44}dialog::backdrop{background:#10182888}dialog h2{margin:6px 0 10px}.close{float:right;border:1px solid var(--line);background:white;border-radius:8px;padding:6px 10px}.modal-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.modal-links a{background:var(--blue);color:white;padding:10px 13px;text-decoration:none;border-radius:9px;font-weight:800}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding:27px}.hero-art{display:none}.filters{grid-template-columns:1fr 1fr}.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.topbar{align-items:flex-start;flex-direction:column}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:1.2rem}.filters,.cards,.info-grid{grid-template-columns:1fr}.hero .search{flex-direction:column}.hero .search button{width:100%}.section-head{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">✦ STEM<span>Scout</span></div>
+  <small>Discover what's possible.</small>
+</header>
+<main>
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Your next step starts here</div>
+      <h1>Your future in STEM is closer than you think.</h1>
+      <p>Find programs, competitions, scholarships, and hands-on experiences that help you explore science, technology, engineering, and math.</p>
+      <div class="search"><input id="heroSearch" placeholder="Try “robotics”, “coding”, or “high school”…" aria-label="Search STEM opportunities"><button class="primary" id="heroSearchBtn">Find opportunities →</button></div>
+    </div>
+    <div class="hero-art" aria-hidden="true"><div class="orbit"><div class="rocket">🚀</div><div class="float one">Build skills</div><div class="float two">Explore STEM</div></div></div>
+  </section>
+  <section class="stats" aria-label="Opportunity summary">
+    <div class="stat"><strong id="totalCount">0</strong><span>opportunities to explore</span></div>
+    <div class="stat"><strong>Free + varied</strong><span>look for options that fit your budget</span></div>
+    <div class="stat"><strong>All experience levels</strong><span>start where you are</span></div>
+  </section>
+  <div class="section-head">
+    <div><h2>Explore opportunities</h2><p>Filter by your interests and find a good next step.</p></div>
+    <button id="showSaved" class="details" style="border:1px solid var(--line);background:white;border-radius:9px;padding:10px 13px;font-weight:800">☆ Saved (<span id="savedCount">0</span>)</button>
+  </div>
+  <div class="filters">
+    <div class="field"><label for="search">Search</label><input id="search" placeholder="Keyword or organization"></div>
+    <div class="field"><label for="category">Interest</label><select id="category"><option value="">All interests</option><option>Engineering</option><option>Coding</option><option>Robotics</option><option>Science</option><option>Scholarship</option></select></div>
+    <div class="field"><label for="grade">Student level</label><select id="grade"><option value="">All levels</option><option>Middle school</option><option>High school</option><option>College</option><option>All students</option></select></div>
+    <div class="field"><label for="cost">Cost</label><select id="cost"><option value="">Any cost</option><option>Free</option><option>Financial aid available</option><option>Varies</option></select></div>
+  </div>
+  <div class="results-line"><span id="resultsCount" aria-live="polite">Showing opportunities</span><button id="reset" class="details" style="border:0;background:transparent;color:var(--blue);font-weight:800">Reset filters</button></div>
+  <section id="cards" class="cards" aria-label="STEM opportunity results"></section>
+  <section class="info-grid">
+    <div class="info"><h3>💡 Not sure where to start?</h3><p>Try a local science fair, a school robotics club, a coding project, or a free online course. Small steps can lead to big discoveries.</p></div>
+    <div class="info"><h3>🌱 Access matters</h3><p>Some programs offer fee waivers, travel support, or need-based aid. Check each program's official page for current eligibility and costs.</p></div>
+  </section>
+  <footer class="footer"><strong>STEM Scout</strong> is a student-built prototype concept. Opportunity details, deadlines, eligibility, costs, and availability can change; always confirm them on the official program website. This demo uses a small curated sample, not a complete or live directory. No account or personal information is required.</footer>
+</main>
+<dialog id="detailsDialog"><button class="close" id="closeDialog">Close ✕</button><div id="dialogContent"></div></dialog>
+<script>
+const opportunities = [
+ {id:"scioly",name:"Science Olympiad",org:"Science Olympiad",category:"Science",grades:["Middle school","High school"],cost:"Varies",format:"Team competition",description:"Team-based STEM events spanning engineering, life science, earth science, chemistry, and physics. Ask a school or regional coordinator about joining or starting a team.",url:"https://www.soinc.org/"},
+ {id:"congressional-app",name:"Congressional App Challenge",org:"U.S. House of Representatives",category:"Coding",grades:["Middle school","High school"],cost:"Free",format:"App competition",description:"Create an app that addresses a problem in your community. Check your representative's district page for eligibility, rules, and the current deadline.",url:"https://www.congressionalappchallenge.us/"},
+ {id:"mit-ocw",name:"MIT OpenCourseWare",org:"Massachusetts Institute of Technology",category:"Engineering",grades:["High school","College","All students"],cost:"Free",format:"Self-paced learning",description:"Explore free course materials in engineering, computer science, mathematics, and many other subjects. Course materials do not typically provide academic credit.",url:"https://ocw.mit.edu/"},
+ {id:"code-org",name:"Code.org Learning Resources",org:"Code.org",category:"Coding",grades:["Middle school","High school","All students"],cost:"Free",format:"Online learning",description:"Practice computer science through beginner-friendly lessons and projects. A useful starting point for students building their first app.",url:"https://code.org/"},
+ {id:"first",name:"FIRST Robotics Competition",org:"FIRST",category:"Robotics",grades:["High school"],cost:"Varies",format:"Team engineering",description:"Join a team to design, build, program, and test a competition robot while learning teamwork and project management. Team availability and fees vary.",url:"https://www.firstinspires.org/robotics/frc"},
+ {id:"girls-who-code",name:"Girls Who Code",org:"Girls Who Code",category:"Coding",grades:["High school","College"],cost:"Free",format:"Clubs and programs",description:"Explore coding and connect with a community through programs for girls and non-binary students. Check the official site for current offerings and eligibility.",url:"https://girlswhocode.com/"},
+ {id:"NASA-internships",name:"NASA STEM Opportunities",org:"NASA",category:"Science",grades:["High school","College"],cost:"Varies",format:"Projects and internships",description:"Find STEM learning resources, challenges, and internship opportunities. Eligibility and age requirements differ by program.",url:"https://www.nasa.gov/learning-resources/"},
+ {id:"summer-programs",name:"NSF STEM for All",org:"National Science Foundation",category:"Engineering",grades:["High school","College","All students"],cost:"Varies",format:"STEM resources",description:"Explore STEM education initiatives and resources supported by the National Science Foundation. Use this as a starting point to discover learning opportunities.",url:"https://www.nsf.gov/"},
+ {id:"scholarships",name:"Society of Women Engineers Scholarships",org:"Society of Women Engineers",category:"Scholarship",grades:["High school","College"],cost:"Free",format:"Scholarships",description:"Explore scholarship opportunities supporting students pursuing engineering and related fields. Review current eligibility and application deadlines.",url:"https://swe.org/scholarships/"},
+ {id:"khan",name:"Khan Academy: Computing",org:"Khan Academy",category:"Coding",grades:["Middle school","High school","College","All students"],cost:"Free",format:"Self-paced learning",description:"Learn programming and computer science fundamentals at your own pace with free online learning resources.",url:"https://www.khanacademy.org/computing"},
+ {id:"mstem",name:"Michigan STEM Resources",org:"University of Michigan",category:"Engineering",grades:["High school","College"],cost:"Varies",format:"Programs and outreach",description:"Explore STEM outreach, learning, and engagement opportunities. Check each program's official page for current dates and eligibility.",url:"https://stem.umich.edu/"},
+ {id:"robotics-resources",name:"VEX Robotics Competitions",org:"REC Foundation",category:"Robotics",grades:["Middle school","High school"],cost:"Varies",format:"Team competition",description:"Learn engineering and programming by designing robots for competitive challenges. Look for teams and events in your area.",url:"https://www.robotevents.com/"},
+ {id:"science-fairs",name:"Regeneron ISEF and Affiliated Fairs",org:"Society for Science",category:"Science",grades:["High school"],cost:"Varies",format:"Research competition",description:"Explore science and engineering research competitions. Students generally qualify through an affiliated regional or local science fair.",url:"https://www.societyforscience.org/isef/"},
+ {id:"udacity",name:"Free STEM Learning Resources",org:"OpenLearn",category:"Engineering",grades:["High school","College","All students"],cost:"Free",format:"Online learning",description:"Browse free learning materials across science, technology, engineering, and mathematics topics.",url:"https://www.open.edu/openlearn/"},
+ {id:"scholarship-search",name:"College Board Scholarship Search",org:"College Board",category:"Scholarship",grades:["High school","College"],cost:"Free",format:"Scholarship search",description:"Search for scholarships and other financial aid opportunities. Verify each award's requirements and deadlines with its provider.",url:"https://bigfuture.collegeboard.org/pay-for-college/scholarship-search"}
+];
+const $ = id => document.getElementById(id);
+let saved = new Set(JSON.parse(localStorage.getItem("stemScoutSaved") || "[]"));
+let savedOnly = false;
+function updateSaved(){ $("savedCount").textContent=saved.size; }
+function safeText(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function filtered(){
+ const q=$("search").value.trim().toLowerCase(), cat=$("category").value, grade=$("grade").value, cost=$("cost").value;
+ return opportunities.filter(o=>{
+  const text=[o.name,o.org,o.description,o.category,o.format].join(" ").toLowerCase();
+  return (!q||text.includes(q))&&(!cat||o.category===cat)&&(!grade||o.grades.includes(grade)||o.grades.includes("All students"))&&(!cost||o.cost===cost)&&(!savedOnly||saved.has(o.id));
+ });
+}
+function render(){
+ const list=filtered(); $("totalCount").textContent=opportunities.length; $("resultsCount").textContent=`Showing ${list.length} of ${opportunities.length} opportunities`;
+ $("cards").innerHTML=list.length?list.map(o=>`
+ <article class="card">
+  <div class="card-top"><span class="tag">${safeText(o.category)}</span><button class="saved" data-save="${o.id}" aria-label="${saved.has(o.id)?"Remove saved opportunity":"Save opportunity"}">${saved.has(o.id)?"★ Saved":"☆ Save"}</button></div>
+  <h3>${safeText(o.name)}</h3><div class="org">${safeText(o.org)}</div><p>${safeText(o.description)}</p>
+  <div class="meta"><span>${safeText(o.grades.join(" · "))}</span><span>${safeText(o.cost)}</span><span>${safeText(o.format)}</span></div>
+  <div class="card-actions"><a class="visit" href="${o.url}" target="_blank" rel="noopener noreferrer">Official site ↗</a><button class="details" data-details="${o.id}">Details</button></div>
+ </article>`).join(""):`<div class="empty"><h3>No matching opportunities yet</h3><p>Try changing your filters or clearing your search.</p></div>`;
+ $("showSaved").innerHTML=`☆ Saved (<span id="savedCount">${saved.size}</span>)${savedOnly?" — Show all":""}`;
+}
+$("cards").addEventListener("click",e=>{
+ const saveBtn=e.target.closest("[data-save]"); if(saveBtn){const id=saveBtn.dataset.save;saved.has(id)?saved.delete(id):saved.add(id);localStorage.setItem("stemScoutSaved",JSON.stringify([...saved]));updateSaved();render();return;}
+ const detailBtn=e.target.closest("[data-details]");if(detailBtn){const o=opportunities.find(x=>x.id===detailBtn.dataset.details);$("dialogContent").innerHTML=`<span class="tag">${safeText(o.category)}</span><h2>${safeText(o.name)}</h2><strong>${safeText(o.org)}</strong><p>${safeText(o.description)}</p><p><b>Who:</b> ${safeText(o.grades.join(", "))}</p><p><b>Cost:</b> ${safeText(o.cost)} — check the official page for current fees, aid, eligibility, and deadlines.</p><p><b>Format:</b> ${safeText(o.format)}</p><div class="modal-links"><a href="${o.url}" target="_blank" rel="noopener noreferrer">Visit official site ↗</a></div>`;$("detailsDialog").showModal();}
+});
+["search","category","grade","cost"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",render));
+$("reset").addEventListener("click",()=>{$("search").value="";$("category").value="";$("grade").value="";$("cost").value="";savedOnly=false;render();});
+$("showSaved").addEventListener("click",()=>{savedOnly=!savedOnly;render();});
+$("heroSearchBtn").addEventListener("click",()=>{$("search").value=$("heroSearch").value;$("search").dispatchEvent(new Event("input"));$("search").focus();document.querySelector(".filters").scrollIntoView({behavior:"smooth",block:"start"});});
+$("heroSearch").addEventListener("keydown",e=>{if(e.key==="Enter")$("heroSearchBtn").click();});
+$("closeDialog").addEventListener("click",()=>$("detailsDialog").close());
+$("detailsDialog").addEventListener("click",e=>{if(e.target===$("detailsDialog"))$("detailsDialog").close();});
+render();updateSaved();
+</script>
+</body>
+</html>
